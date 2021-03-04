@@ -1,27 +1,24 @@
-# NgrxCourse
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+## Ngrx (with NgRx Data)
 
-## Development server
+# Installing the Angular CLI
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+With the following command the angular-cli will be installed globally in your machine:
 
-## Code scaffolding
+    npm install -g @angular/cli 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# To Run the Development Backend Server
 
-## Build
+We can start the sample application backend with the following command:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    npm run server
 
-## Running unit tests
+This is a small Node REST API server.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# To run the Development UI Server
 
-## Running end-to-end tests
+To run the frontend part of our code, we will use the Angular CLI:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+    npm start 
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
