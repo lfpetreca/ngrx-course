@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { tap } from "rxjs/operators";
@@ -8,7 +7,7 @@ import { noop } from "rxjs";
 
 import { AuthService } from "../auth.service";
 import { AppState } from '../../reducers';
-import { AuthActions } from '../action-types';
+import { login } from '../auth.actions';
 
 @Component({
   selector: 'login',
@@ -33,25 +32,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   login() {
     const val = this.form.value;
-
     this.auth.login(val.email, val.password)
       .pipe(
         tap(user => {
           console.log(user);
-          this.store.dispatch(AuthActions.login({ user }));
+          this.store.dispatch(login({ user }))
           this.router.navigateByUrl('/courses');
         })
       )
       .subscribe(
         noop,
-        () => alert('Login Failed!')
+        () => alert('Login Failed')
       );
-
   }
 
 }

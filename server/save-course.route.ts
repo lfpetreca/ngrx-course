@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { COURSES } from "./db-data";
+import {Request, Response} from 'express';
+import {COURSES} from "./db-data";
 
 
 export function saveCourse(req: Request, res: Response) {
@@ -16,7 +16,7 @@ export function saveCourse(req: Request, res: Response) {
 
     setTimeout(() => {
 
-        res.status(200).json(COURSES[id]);
+      res.status(200).json(COURSES[id]);
 
     }, 2000);
 

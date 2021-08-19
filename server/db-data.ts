@@ -446,6 +446,9 @@ export const LESSONS = {
     courseId: 1
   },
 
+
+  // Angular Testing Course
+
   40: {
     id: 40,
     description: 'Angular Testing Course - Helicopter View',
@@ -526,6 +529,8 @@ export const LESSONS = {
     courseId: 12
   },
 
+
+  // Ngrx Course
   50: {
     id: 50,
     "description": "Welcome to the Angular Ngrx Course",
