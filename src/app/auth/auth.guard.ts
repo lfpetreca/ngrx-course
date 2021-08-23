@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -25,5 +25,4 @@ export class AuthGuard implements CanActivate {
       })
     )
   }
-
 }

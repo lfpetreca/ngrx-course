@@ -1,37 +1,31 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Course } from '../model/course';
-import { AppState } from '../../reducers';
-import { Update } from '@ngrx/entity';
-import { courseUpdated } from '../courses.actions';
+import { CourseEntityService } from '../services/courses-entity.service';
+
 
 @Component({
   selector: 'course-dialog',
   templateUrl: './edit-course-dialog.component.html',
-  styleUrls: ['./edit-course-dialog.component.css']
+  styleUrls: ['./edit-course-dialog.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditCourseDialogComponent {
-
   form: FormGroup;
-
   dialogTitle: string;
-
   course: Course;
-
   mode: 'create' | 'update';
-
   loading$: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
-    private store: Store<AppState>) {
-
+    private coursesService: CourseEntityService
+  ) {
     this.dialogTitle = data.dialogTitle;
     this.course = data.course;
     this.mode = data.mode;
@@ -46,8 +40,7 @@ export class EditCourseDialogComponent {
     if (this.mode == 'update') {
       this.form = this.fb.group(formControls);
       this.form.patchValue({ ...data.course });
-    }
-    else if (this.mode == 'create') {
+    } else if (this.mode == 'create') {
       this.form = this.fb.group({
         ...formControls,
         url: ['', Validators.required],
@@ -66,12 +59,14 @@ export class EditCourseDialogComponent {
       ...this.form.value
     };
 
-    const update: Update<Course> = {
-      id: course.id,
-      changes: course
-    };
-
-    this.store.dispatch(courseUpdated({ update }));
-    this.dialogRef.close();
+    if (this.mode == 'update') {
+      this.coursesService.update(course);
+      this.dialogRef.close();
+    } else if (this.mode == 'create') {
+      //localloading?
+      this.coursesService.add(course).subscribe(() => {
+        this.dialogRef.close();
+      });
+    }
   }
 }
